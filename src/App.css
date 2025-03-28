@@ -1,0 +1,12 @@
+@layer theme, components, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+* {
+  font-family: 'system-ui';
+}
+
+html {
+  width: 200px;
+  height: 120px;
+}

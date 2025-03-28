@@ -1,0 +1,20 @@
+@layer theme, components, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+* {
+  font-family: 'system-ui';
+}
+
+body {
+  margin: 0px;
+  /*background-color: #1E1E1F;*/
+}
+
+.options-buttons {
+  display: flex;
+  gap: 40px;
+  height: 75px;
+  margin-left: 50px;
+  padding-top: 10px;
+}
