@@ -1,17 +1,19 @@
 import SaveButton from './SaveButton/SaveButton';
-import ClearButton from './ClearButton/ClearButton';
 import MonacoEditor from './MonacoEditor/MonacoEditor';
+
+import MonacoEditorProvider from './MonacoEditor/provider/MonacoEditorProvider';
 
 import './Options.css';
 
 const Options = () => {
   return (
     <div className="options-root">
-      <div className="options-buttons">
-        <SaveButton />
-        <ClearButton />
-      </div>
-      <MonacoEditor />
+      <MonacoEditorProvider>
+        <div className="options-container">
+          <SaveButton />
+        </div>
+        <MonacoEditor />
+      </MonacoEditorProvider>
     </div>
   );
 };

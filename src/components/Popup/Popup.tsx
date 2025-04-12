@@ -1,30 +1,44 @@
+import { useState, useEffect, useCallback } from 'react';
 import SettingsIcon from '@mui/icons-material/Settings';
 
+import type { UrlData } from '../../types/url-data';
+
+import './Popup.css';
+
 const Popup = () => {
+  const [urlCount, setUrlCount] = useState(0);
+
   const settingsIconClick = () => {
     chrome.runtime.openOptionsPage();
   };
 
+  useEffect(() => {
+    chrome.storage.local.get(null, (data: UrlData) => {
+      if (!(Object.keys(data).length === 0)) {
+        setUrlCount(Object.keys(data.validUrls).length);
+      } else {
+        setUrlCount(0);
+      }
+    });
+  }, []);
+
+  const computedUrlCount = useCallback(() => {
+    return urlCount.toString().length > 10 // url count exceeds 10 digits
+      ? urlCount.toLocaleString('en-US').substring(0, 13) + '...'
+      : urlCount.toLocaleString('en-US');
+  }, [urlCount]);
+
   return (
-    <div>
-      <div className="p-1">
-        {/*
-          <h1 className="popup-heading">Block URL</h1>
-          <p className="popup-paragraph text-lg">
-            By{' '}
-            <a href="https://github.com/alexwkleung" target="_blank">
-              alexwkleung
-            </a>
-          </p>
-        */}
+    <div className="popup-container">
+      <div className="blocked-urls-container p-1">
         <div className="blocked-url-count-root text-lg">
           Blocked URLs:
           <div className="blocked-url-count">
-            <span>{0}</span>
+            <span className="computed-url-count">{computedUrlCount()}</span>
           </div>
         </div>
       </div>
-      <div className="flex flex-row-reverse">
+      <div className="settings-icon flex flex-row-reverse">
         <SettingsIcon
           onClick={settingsIconClick}
           sx={{

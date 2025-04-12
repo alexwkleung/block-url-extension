@@ -1,9 +1,9 @@
-const Error = () => {
-  // const [currUrl, setCurrUrl] = useState('');
+import './Error.css';
 
+const Error = () => {
   return (
-    <div>
-      <h1>This site has been blocked! :(</h1>
+    <div className="error-container">
+      <h1>This site has been blocked!</h1>
     </div>
   );
 };

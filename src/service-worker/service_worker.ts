@@ -1,6 +1,9 @@
+import { urlExistsInChromeStorage } from '../utils/url-exists-in-chrome-storage';
+
 import type { OnMessagePropsRequestServiceWorker } from '../types/on-message-props-request-service-worker';
 
 function service_worker(): void {
+  // async message handler
   const asyncMessageHandler = (
     handler: (
       request: OnMessagePropsRequestServiceWorker,
@@ -19,20 +22,39 @@ function service_worker(): void {
     };
   };
 
-  chrome.tabs.onUpdated.addListener(
-    (tabId: number, tabChangeInfo: chrome.tabs.TabChangeInfo, tab: chrome.tabs.Tab) => {
-      if (tabChangeInfo.status === 'loading' && tab.url) {
-        chrome.tabs
-          .sendMessage(tabId, { action: 'tabLoad', url: tab.url })
-          .catch((err) => console.debug('[Chrome Tabs]:', err));
-      }
-    }
-  );
+  // cache to hold current processed tabs
+  const currProcessedTabsCache: Set<number> = new Set();
 
+  // tab status is loading
+  chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
+    if (changeInfo.status === 'loading' && tab.url && !currProcessedTabsCache.has(tabId)) {
+      // during load, add the current tab to cache
+      currProcessedTabsCache.add(tabId);
+
+      await urlExistsInChromeStorage(tab.url).then((exists) => {
+        if (exists) {
+          chrome.tabs
+            .sendMessage(tabId, {
+              action: 'actionBlockPage',
+              trigger: 'triggerErrorPage',
+              url: tab.url,
+            })
+            .catch((err) => {
+              console.debug(err);
+            });
+        }
+      });
+
+      // once tab is processed, delete it from cache
+      currProcessedTabsCache.delete(tabId);
+    }
+  });
+
+  // request is error page
   chrome.runtime.onMessage.addListener(
     asyncMessageHandler(
       async (request: OnMessagePropsRequestServiceWorker, sender: chrome.runtime.MessageSender) => {
-        if (request.action === 'setError' && sender.tab?.id) {
+        if (request.action === 'errorPage' && sender.tab?.id) {
           await chrome.tabs.update(sender.tab.id, {
             url: chrome.runtime.getURL('error.html'),
           });

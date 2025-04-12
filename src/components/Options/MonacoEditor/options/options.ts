@@ -2,7 +2,7 @@ import type { monaco } from '../monaco/monaco';
 
 export const options: monaco.editor.IStandaloneEditorConstructionOptions | undefined = {
   fontSize: 25,
-  language: 'plaintext',
+  language: 'customPlaintext',
   minimap: {
     enabled: false,
   },

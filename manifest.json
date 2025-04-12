@@ -23,5 +23,7 @@
       "resources": ["error.html"]
     }
   ],
-  "permissions": ["tabs", "webNavigation"]
+  "permissions": ["tabs", "webNavigation", "storage", "unlimitedStorage"],
+  "host_permissions": ["<all_urls>"],
+  "incognito": "split"
 }

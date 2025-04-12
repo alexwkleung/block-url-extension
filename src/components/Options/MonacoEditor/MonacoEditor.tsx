@@ -1,29 +1,55 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useContext } from 'react';
 import { options } from './options/options';
 import { monaco } from './monaco/monaco';
 import { initMonacoTheme } from './monaco/init-theme';
+import { MonacoEditorContext } from './context/MonacoEditorContext';
+import { initCustomPlainTextLanguage } from './language/custom-plaintext';
 
 import type { RefObject } from 'react';
+import type { EditorValue } from '../../../types/url-data';
 
 import './MonacoEditor.css';
 
 const MonacoEditor = () => {
-  const monacoEl: RefObject<null> = useRef(null);
+  // initialize custom plaintext language before setting up editor
+  initCustomPlainTextLanguage();
 
-  const editorRef: RefObject<monaco.editor.IStandaloneCodeEditor | null> =
-    useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
+  const monacoEl: RefObject<HTMLDivElement | null> = useRef<HTMLDivElement | null>(null);
+  const { setEditor } = useContext(MonacoEditorContext);
 
   useEffect(() => {
-    if (monacoEl.current) {
-      editorRef.current = monaco.editor.create(monacoEl.current, options);
-      initMonacoTheme();
-      editorRef.current?.focus();
-    }
+    const container: HTMLDivElement | null = monacoEl.current;
 
-    return () => editorRef.current?.dispose();
-  }, [monacoEl]);
+    if (!container) return;
 
-  return <div className="editor" ref={monacoEl}></div>;
+    const editorInstance: monaco.editor.IStandaloneCodeEditor = monaco.editor.create(
+      container,
+      options
+    );
+
+    // attempt to set stored editor value if it exists
+    chrome.storage.local.get(['editorValue'], (data: EditorValue) => {
+      if (!(Object.keys(data).length === 0)) {
+        editorInstance.setValue(data.editorValue);
+      } else {
+        editorInstance.setValue('');
+      }
+    });
+
+    initMonacoTheme();
+    editorInstance.focus();
+
+    setEditor(editorInstance);
+
+    // clean up
+    return () => {
+      setEditor(null);
+      editorInstance.dispose();
+      container.replaceChildren();
+    };
+  }, [setEditor]);
+
+  return <div className="editor-container" ref={monacoEl}></div>;
 };
 
 export default MonacoEditor;
