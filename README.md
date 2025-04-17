@@ -85,7 +85,7 @@ The following URL patterns have been tested (not 100%):
 4. **Are you able to see the URLs in my browser history and visited sites?**
 
    - No, your browser history and visited sites are only seen by you.
-   - The extension will read the data of your tabs (URL, loading state, etc) but your browser history or visited sites are unknown.
+   - The extension will read the data of your tabs (URL, loading state, etc) only. Your browser history or visited sites are unknown to the extension - especially when it comes to the computational logic.
 
 5. **How can I confirm that you're not doing anything suspicious when I visit a URL?**
 
