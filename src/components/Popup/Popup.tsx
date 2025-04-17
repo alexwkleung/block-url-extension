@@ -8,8 +8,8 @@ import './Popup.css';
 const Popup = () => {
   const [urlCount, setUrlCount] = useState(0);
 
-  const settingsIconClick = () => {
-    chrome.runtime.openOptionsPage();
+  const settingsIconClick = async () => {
+    await chrome.runtime.openOptionsPage();
   };
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const Popup = () => {
       </div>
       <div className="settings-icon flex flex-row-reverse">
         <SettingsIcon
-          onClick={settingsIconClick}
+          onClick={async () => await settingsIconClick()}
           sx={{
             '&:hover': {
               backgroundColor: 'lightgrey',

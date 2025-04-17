@@ -4,6 +4,7 @@ import { monaco } from './monaco/monaco';
 import { initMonacoTheme } from './monaco/init-theme';
 import { MonacoEditorContext } from './context/MonacoEditorContext';
 import { initCustomPlainTextLanguage } from './language/custom-plaintext';
+import { initMonacoDecorations } from './language/decorations';
 
 import type { RefObject } from 'react';
 import type { EditorValue } from '../../../types/url-data';
@@ -38,6 +39,8 @@ const MonacoEditor = () => {
 
     initMonacoTheme();
     editorInstance.focus();
+
+    initMonacoDecorations(editorInstance);
 
     setEditor(editorInstance);
 

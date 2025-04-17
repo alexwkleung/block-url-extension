@@ -53,8 +53,13 @@ const SaveButton = () => {
         onClick={saveButtonOpen}
         sx={{
           fontSize: '50px',
-          '&:hover': { backgroundColor: 'lightgrey' },
+          '&:hover': {
+            backgroundColor: 'rgb(78, 78, 78)',
+            borderRadius: '10px',
+          },
           padding: '5px',
+          marginLeft: '50px',
+          color: '#d4d4d4',
         }}
       />
       <Dialog open={saveDialogOpen} onClose={saveButtonClose}>

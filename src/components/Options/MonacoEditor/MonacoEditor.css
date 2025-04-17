@@ -1,4 +1,16 @@
 .editor-container {
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 86px);
+}
+
+.monaco-editor .scroll-decoration {
+  top: 0;
+  left: 0;
+  height: 0px;
+  box-shadow: none !important;
+}
+
+.wildcard-decoration {
+  color: grey !important;
+  font-weight: bold;
 }
