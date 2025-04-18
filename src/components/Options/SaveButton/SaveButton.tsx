@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import SaveIcon from '@mui/icons-material/Save';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -11,10 +11,17 @@ import { isValidUrl } from '../../../utils/is-valid-url';
 
 import type { UrlData } from '../../../types/url-data';
 
-const SaveButton = () => {
+const SaveButton = ({ isPressedKeySave }: { isPressedKeySave: boolean }) => {
   const { editor } = useContext(MonacoEditorContext);
 
   const [saveDialogOpen, setSaveDialogOpen] = useState(false);
+
+  useEffect(() => {
+    // save key is pressed
+    if (isPressedKeySave) {
+      setSaveDialogOpen(true);
+    }
+  }, [isPressedKeySave]);
 
   const saveButtonOpen = () => {
     setSaveDialogOpen(true);
@@ -54,7 +61,7 @@ const SaveButton = () => {
         sx={{
           fontSize: '50px',
           '&:hover': {
-            backgroundColor: 'rgb(78, 78, 78)',
+            backgroundColor: '#4e4e4e',
             borderRadius: '10px',
           },
           padding: '5px',
