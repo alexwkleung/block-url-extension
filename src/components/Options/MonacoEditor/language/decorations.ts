@@ -20,7 +20,11 @@ export function initMonacoDecorations(editor: monaco.editor.IStandaloneCodeEdito
 
         // TODO:
         // validate if lineContent is a url
-        if (!lineContent.startsWith('#') && lineContent.endsWith('/*')) {
+        if (
+          !lineContent.startsWith('#') &&
+          !lineContent.startsWith('//') &&
+          lineContent.endsWith('/*')
+        ) {
           const asteriskIndex = lineContent.length - 1;
 
           decorations.push({

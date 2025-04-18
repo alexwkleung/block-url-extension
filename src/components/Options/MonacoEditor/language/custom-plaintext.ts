@@ -6,7 +6,7 @@ export function initCustomPlainTextLanguage(): void {
   monaco.languages.setMonarchTokensProvider('customPlaintext', {
     tokenizer: {
       root: [
-        [/^#.*/, 'comment'], // comment token
+        [/^(#|\/\/).*/, 'comment'], // comment token
         [/.*/, 'text'], // plaintext token
       ],
     },
