@@ -69,7 +69,7 @@ const SaveButton = ({ isPressedKeySave }: { isPressedKeySave: boolean }) => {
           color: '#d4d4d4',
         }}
       />
-      <Dialog open={saveDialogOpen} onClose={saveButtonClose}>
+      <Dialog open={saveDialogOpen} onClose={saveButtonClose} disableRestoreFocus>
         <DialogTitle>Save All URLs?</DialogTitle>
         <DialogContent>
           <DialogContentText>Are you sure you want to save all valid URLs?</DialogContentText>
