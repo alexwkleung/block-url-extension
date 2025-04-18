@@ -67,6 +67,13 @@ The following URL patterns have been tested (not 100%):
 4. URLs without protocol (i.e., `<subdomain>.<url>.<tld>`)
 5. URLs without subdomain (i.e., `http[s]://<url>.<tld>`)
 
+## Ignoring URLs (Comments)
+
+You can ignore URLs using the comment syntax. Add one of these characters at the beginning of the line to create a comment:
+
+- `#`
+- `//`
+
 ## FAQ
 
 1. **Where does my data get stored?**
@@ -95,6 +102,11 @@ The following URL patterns have been tested (not 100%):
 - Basic overview:
   - `service_worker.ts` runs in the background when the extension is running. It handles displaying the error page and reading your tab data to execute existence logic between the tab URL and storage.
   - `content.ts` handles the document logic on the client, specifically an observer to detect the document state. It communicates with the service worker using messages to execute code.
+
+6. Why are there are two ways to insert a comment?
+
+   - Some pasted data may include the `#` for comments and others might use `//`.
+   - Portability and simply copy and paste without messing up data.
 
 ## Contribute
 
