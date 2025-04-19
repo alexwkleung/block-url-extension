@@ -10,6 +10,13 @@
   box-shadow: none !important;
 }
 
+/*
+* editor whitespace
+*/
+.monaco-editor .mtkz {
+  color: #c6c5c5 !important;
+}
+
 .wildcard-decoration {
   color: grey !important;
   font-weight: bold;
