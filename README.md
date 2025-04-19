@@ -61,11 +61,17 @@ npm run build
 
 The following URL patterns have been tested (not 100%):
 
-1. [Steven Black hosts](https://github.com/StevenBlack/hosts) (i.e., `0.0.0.0<whitespace character><url>`)
-2. Exact URLs (i.e., `http[s]://<subdomain><url>.<tld>`)
-3. Wildcard URLs, including known paths (i.e., `<url>/*`, `<url>/<known path>/*`)
-4. URLs without protocol (i.e., `<subdomain>.<url>.<tld>`)
-5. URLs without subdomain (i.e., `http[s]://<url>.<tld>`)
+1. [Steven Black hosts](https://github.com/StevenBlack/hosts)
+   - `0.0.0.0<whitespace character><url>`
+2. Exact URLs
+   - `http[s]://<subdomain><url>.<tld>`
+3. Wildcard URLs, including known paths.
+   - `<url>/*`
+   - `<url>/<known path>/*`
+4. URLs without protocol
+   - `<subdomain>.<url>.<tld>`
+5. URLs without subdomain
+   - `http[s]://<url>.<tld>`
 
 ## Ignoring URLs (Comments)
 
@@ -103,10 +109,24 @@ You can ignore URLs using the comment syntax. Add one of these characters at the
   - `service_worker.ts` runs in the background when the extension is running. It handles displaying the error page and reading your tab data to execute existence logic between the tab URL and storage.
   - `content.ts` handles the document logic on the client, specifically an observer to detect the document state. It communicates with the service worker using messages to execute code.
 
-6. Why are there are two ways to insert a comment?
+6. **Why are there are two ways to insert a comment?**
 
    - Some pasted data may include the `#` for comments and others might use `//`.
    - Portability and simply copy and paste without messing up data.
+
+7. **I put a wildcard (`/*`) after the URL but why doesn't it show the syntax highlighting for it?**
+
+   - To ensure that your wildcard (`/*`) syntax is valid, there shouldn't be any spaces after the asterisk. You can tell if there is trailing whitespace via the rendered whitespace dots.
+
+8. **What are the dots in the editor?**
+
+   - Those are whitespace characters.
+   - Rendering of whitespace is enabled so that it makes it easier to detect invalid URLs due to whitespace issues.
+
+9. **How do I save my URLs?**
+   - You can save your URLs via one of the following ways:
+     - Click the save icon on the top left of the options page.
+     - Press `Cmd+S` (macOS) or `Ctrl+S` (Windows/Linux/macOS).
 
 ## Contribute
 
