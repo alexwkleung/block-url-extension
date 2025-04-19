@@ -15,7 +15,12 @@ const Popup = () => {
   useEffect(() => {
     chrome.storage.local.get(null, (data: UrlData) => {
       if (!(Object.keys(data).length === 0)) {
-        setUrlCount(Object.keys(data.validUrls).length);
+        // filter valid urls to exclude commented lines
+        const temp: string[] = data.validUrls.filter(
+          (url: string) => !url.startsWith('//') && !url.startsWith('#')
+        );
+
+        setUrlCount(Object.keys(temp).length);
       } else {
         setUrlCount(0);
       }
