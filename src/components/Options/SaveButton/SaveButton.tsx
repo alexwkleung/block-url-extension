@@ -8,6 +8,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import { MonacoEditorContext } from '../MonacoEditor/context/MonacoEditorContext';
 import { isValidUrl } from '../../../utils/is-valid-url';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 
 import type { UrlData } from '../../../types/url-data';
 
@@ -15,6 +17,8 @@ const SaveButton = ({ isPressedKeySave }: { isPressedKeySave: boolean }) => {
   const { editor } = useContext(MonacoEditorContext);
 
   const [saveDialogOpen, setSaveDialogOpen] = useState(false);
+
+  const [saveAlert, setSaveAlert] = useState(false);
 
   useEffect(() => {
     // save key is pressed
@@ -51,7 +55,13 @@ const SaveButton = ({ isPressedKeySave }: { isPressedKeySave: boolean }) => {
       };
 
       chrome.storage.local.set(urlData);
+
+      setSaveAlert(true);
     }
+  };
+
+  const alertOnClose = () => {
+    setSaveAlert(false);
   };
 
   return (
@@ -79,6 +89,22 @@ const SaveButton = ({ isPressedKeySave }: { isPressedKeySave: boolean }) => {
           <Button onClick={saveButtonContinue}>Save</Button>
         </DialogActions>
       </Dialog>
+      {saveAlert ? (
+        <Snackbar
+          autoHideDuration={3500}
+          open={saveAlert}
+          onClose={alertOnClose}
+          disableWindowBlurListener={true}
+        >
+          <Alert
+            icon={false}
+            onClose={alertOnClose}
+            sx={{ backgroundColor: '#8bc34a', color: '#000000' }}
+          >
+            Successfully saved URLs
+          </Alert>
+        </Snackbar>
+      ) : null}
     </>
   );
 };
