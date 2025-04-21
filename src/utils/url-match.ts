@@ -11,15 +11,8 @@ const normalizeUrl: (url: string) => string = (url: string): string => {
     .replace(urlPatterns.trailingSlash, '');
 };
 
-export function urlMatch(url: string, validUrls?: string[]): boolean {
-  // validUrls is null or is empty
-  if (!validUrls || validUrls.length === 0) return false;
-
-  // normalized url ref
-  const normalizedUrl: string = normalizeUrl(url);
-
-  // advanced exact matching
-  const exactMatch: boolean = validUrls.some((pattern: string): boolean => {
+const exactUrlMatch = (normalizedUrl: string, validUrls: string[]): boolean => {
+  return validUrls.some((pattern: string): boolean => {
     const exactPattern: string = pattern
       .replace(urlPatterns.stevenBlackHosts, '')
       .replace(urlPatterns.protocolSubdomain, '')
@@ -27,9 +20,10 @@ export function urlMatch(url: string, validUrls?: string[]): boolean {
 
     return exactPattern === normalizedUrl;
   });
+};
 
-  // advanced wildcard matching
-  const wildcardMatch = validUrls.some((pattern: string): boolean => {
+const wildcardUrlMatch = (normalizedUrl: string, validUrls: string[]): boolean => {
+  return validUrls.some((pattern: string): boolean => {
     if (pattern.endsWith(urlPatterns.wildcardStr)) {
       const basePattern = pattern
         .replace(urlPatterns.protocolSubdomain, '')
@@ -41,15 +35,37 @@ export function urlMatch(url: string, validUrls?: string[]): boolean {
 
     return false;
   });
+};
 
-  // basic exact matching
-  const basicExactMatch: boolean = validUrls?.includes(url);
+const basicExactUrlMatch = (url: string, validUrls: string[]): boolean => {
+  return validUrls?.includes(url);
+};
 
-  // basic wildcard matching
-  const basicWildcardMatch: boolean = validUrls?.some(
+const basicWildcardUrlMatch = (url: string, validUrls: string[]): boolean => {
+  return validUrls?.some(
     (pattern: string): boolean =>
       pattern.endsWith(urlPatterns.wildcardStr) && url.startsWith(pattern.slice(0, -2))
   );
+};
+
+export function urlMatch(url: string, validUrls?: string[]): boolean {
+  // validUrls is null or is empty
+  if (!validUrls || validUrls.length === 0) return false;
+
+  // normalized url ref
+  const normalizedUrl: string = normalizeUrl(url);
+
+  // advanced exact matching
+  const exactMatch: boolean = exactUrlMatch(normalizedUrl, validUrls);
+
+  // advanced wildcard matching
+  const wildcardMatch = wildcardUrlMatch(normalizedUrl, validUrls);
+
+  // basic exact matching
+  const basicExactMatch: boolean = basicExactUrlMatch(url, validUrls);
+
+  // basic wildcard matching
+  const basicWildcardMatch: boolean = basicWildcardUrlMatch(url, validUrls);
 
   return exactMatch || wildcardMatch || basicExactMatch || basicWildcardMatch;
 }
