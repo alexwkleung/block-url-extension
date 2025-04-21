@@ -1,12 +1,14 @@
+import { urlPatterns } from './url-patterns';
+
 const normalizeUrl: (url: string) => string = (url: string): string => {
   // we need to normalize the url to handle different cases:
   // 1. steven black hosts
   // 2. protocols and/or www subdomains
   // 3. traililing slashes
   return url
-    .replace(/^\s*0\.0\.0\.0\s+/, '')
-    .replace(/^(https?:\/\/)?(www\.)?/, '')
-    .replace(/\/$/, '');
+    .replace(urlPatterns.stevenBlackHosts, '')
+    .replace(urlPatterns.protocolSubdomain, '')
+    .replace(urlPatterns.trailingSlash, '');
 };
 
 export function urlMatch(url: string, validUrls?: string[]): boolean {
@@ -19,20 +21,20 @@ export function urlMatch(url: string, validUrls?: string[]): boolean {
   // advanced exact matching
   const exactMatch: boolean = validUrls.some((pattern: string): boolean => {
     const exactPattern: string = pattern
-      .replace(/^\s*0\.0\.0\.0\s+/, '')
-      .replace(/^(https?:\/\/)?(www\.)?/, '')
-      .replace(/\/$/, '');
+      .replace(urlPatterns.stevenBlackHosts, '')
+      .replace(urlPatterns.protocolSubdomain, '')
+      .replace(urlPatterns.trailingSlash, '');
 
     return exactPattern === normalizedUrl;
   });
 
   // advanced wildcard matching
   const wildcardMatch = validUrls.some((pattern: string): boolean => {
-    if (pattern.endsWith('/*')) {
+    if (pattern.endsWith(urlPatterns.wildcardStr)) {
       const basePattern = pattern
-        .replace(/^(https?:\/\/)?(www\.)?/, '')
+        .replace(urlPatterns.protocolSubdomain, '')
         .slice(0, -2)
-        .replace(/\/$/, '');
+        .replace(urlPatterns.trailingSlash, '');
 
       return normalizedUrl.startsWith(basePattern);
     }
@@ -45,7 +47,8 @@ export function urlMatch(url: string, validUrls?: string[]): boolean {
 
   // basic wildcard matching
   const basicWildcardMatch: boolean = validUrls?.some(
-    (pattern: string): boolean => pattern.endsWith('/*') && url.startsWith(pattern.slice(0, -2))
+    (pattern: string): boolean =>
+      pattern.endsWith(urlPatterns.wildcardStr) && url.startsWith(pattern.slice(0, -2))
   );
 
   return exactMatch || wildcardMatch || basicExactMatch || basicWildcardMatch;

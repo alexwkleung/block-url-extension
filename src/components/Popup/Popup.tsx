@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import SettingsIcon from '@mui/icons-material/Settings';
+import { urlPatterns } from '../../utils/url-patterns';
 
 import type { UrlData } from '../../types/url-data';
 
@@ -17,7 +18,9 @@ const Popup = () => {
       if (!(Object.keys(data).length === 0)) {
         // filter valid urls to exclude commented lines
         const temp: string[] = data.validUrls.filter(
-          (url: string) => !url.startsWith('//') && !url.startsWith('#')
+          (url: string) =>
+            !url.startsWith(urlPatterns.doubleSlashCommentStr) &&
+            !url.startsWith(urlPatterns.hashCommentStr)
         );
 
         setUrlCount(Object.keys(temp).length);
