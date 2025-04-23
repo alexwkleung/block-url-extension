@@ -10,6 +10,8 @@ import { MonacoEditorContext } from '../MonacoEditor/context/MonacoEditorContext
 import { isValidUrl } from '../../../utils/is-valid-url';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
+import Tooltip from '@mui/material/Tooltip';
+import { platform } from '../../../utils/platform';
 
 import type { UrlData } from '../../../types/url-data';
 
@@ -64,21 +66,36 @@ const SaveButton = ({ isPressedKeySave }: { isPressedKeySave: boolean }) => {
     setSaveAlert(false);
   };
 
+  const saveKeyTitle: string = `Save ${
+    platform.platformMac.includes(platform.agentPlatform) ? '(⌘+S)' : '(Ctrl+S)'
+  }`;
+
   return (
     <>
-      <SaveIcon
-        onClick={saveButtonOpen}
-        sx={{
-          fontSize: '50px',
-          '&:hover': {
-            backgroundColor: '#4e4e4e',
-            borderRadius: '10px',
+      <Tooltip
+        title={saveKeyTitle}
+        slotProps={{
+          tooltip: {
+            sx: {
+              fontSize: '18px',
+            },
           },
-          padding: '5px',
-          marginLeft: '50px',
-          color: '#d4d4d4',
         }}
-      />
+      >
+        <SaveIcon
+          onClick={saveButtonOpen}
+          sx={{
+            fontSize: '50px',
+            '&:hover': {
+              backgroundColor: '#4e4e4e',
+              borderRadius: '10px',
+            },
+            padding: '5px',
+            marginLeft: '50px',
+            color: '#d4d4d4',
+          }}
+        />
+      </Tooltip>
       <Dialog open={saveDialogOpen} onClose={saveButtonClose} disableRestoreFocus>
         <DialogTitle>Save All URLs?</DialogTitle>
         <DialogContent>
