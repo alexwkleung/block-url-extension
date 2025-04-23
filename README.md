@@ -4,6 +4,21 @@ A Chrome extension that blocks URLs of your choice.
 
 Those who want to simply block URLs at a browser level (i.e., personal reason, work distraction, etc) will appreciate this extension to help with their daily browsing.
 
+## Contents
+
+1. [Intro](#block-url-extension)
+2. [Chrome Manifest Version](#chrome-manifest-version)
+3. [Tech Stack](#tech-stack)
+4. [Development](#development)
+5. [Extension Installation](#extension-installation)
+6. [Extension Usage](#extension-usage)
+7. [Supported URL Patterns](#supported-url-patterns)
+8. [Ignoring URLs (Comments)](#ignoring-urls-comments)
+9. [FAQ](#faq)
+10. [Issues](#issues)
+11. [Contribute](#contribute)
+12. [License](#license)
+
 ## Chrome Manifest Version
 
 This extension uses Manifest V3.
@@ -41,6 +56,10 @@ npm run build
 
 \*\*Before installation and usage, please read the [FAQ](#faq) as it contains important questions and answers which are good to know as a user of this extension.
 
+### Chrome Web Store
+
+TBA
+
 ### Manual
 
 1. Build the extension via the steps in the [development section](#development) or download the pre-compiled `dist` through [GitHub releases](https://github.com/alexwkleung/block-url-extension/releases).
@@ -57,9 +76,13 @@ npm run build
 
 ![Load unpacked](./docs-assets/load-unpacked.png)
 
+## Extension Usage
+
+TBA
+
 ## Supported URL Patterns
 
-The following URL patterns have been tested (not 100%):
+Below are the supported URL patterns (not 100% battle tested):
 
 1. [Steven Black hosts](https://github.com/StevenBlack/hosts)
    - `0.0.0.0<whitespace character><url>`
@@ -72,6 +95,8 @@ The following URL patterns have been tested (not 100%):
    - `<subdomain>.<url>.<tld>`
 5. URLs without subdomain
    - `http[s]://<url>.<tld>`
+6. Partial keyword URLs
+   - `<url>/[<keyword>, <...>]`
 
 ## Ignoring URLs (Comments)
 
@@ -102,12 +127,12 @@ You can ignore URLs using the comment syntax. Add one of these characters at the
 
 5. **How can I confirm that you're not doing anything suspicious when I visit a URL?**
 
-- The service worker and content script are responsible for handling the logic that deals with tabs and when a URL is visited. You can view the respective code here:
-  - [service_worker.ts](https://github.com/alexwkleung/block-url-extension/blob/main/src/service-worker/service_worker.ts)
-  - [content.ts](https://github.com/alexwkleung/block-url-extension/blob/main/src/content/content.ts)
-- Basic overview:
-  - `service_worker.ts` runs in the background when the extension is running. It handles displaying the error page and reading your tab data to execute existence logic between the tab URL and storage.
-  - `content.ts` handles the document logic on the client, specifically an observer to detect the document state. It communicates with the service worker using messages to execute code.
+   - The service worker and content script are responsible for handling the logic that deals with tabs and when a URL is visited. You can view the respective code here:
+     - [service_worker.ts](https://github.com/alexwkleung/block-url-extension/blob/main/src/service-worker/service_worker.ts)
+     - [content.ts](https://github.com/alexwkleung/block-url-extension/blob/main/src/content/content.ts)
+   - Basic overview:
+     - `service_worker.ts` runs in the background when the extension is running. It handles displaying the error page and reading your tab data to execute existence logic between the tab URL and storage.
+     - `content.ts` handles the document logic on the client, specifically an observer to detect the document state. It communicates with the service worker using messages to execute code.
 
 6. **Why are there are two ways to insert a comment?**
 
@@ -124,9 +149,19 @@ You can ignore URLs using the comment syntax. Add one of these characters at the
    - Rendering of whitespace is enabled so that it makes it easier to detect invalid URLs due to whitespace issues.
 
 9. **How do I save my URLs?**
+
    - You can save your URLs via one of the following ways:
      - Click the save icon on the top left of the options page.
      - Press `Cmd+S` (macOS) or `Ctrl+S` (Windows/Linux/macOS).
+
+10. **How does the partial keyword pattern work?**
+
+    - To create a partial keyword pattern, you must add `/[<keyword>]` at the end of the URL. `<keyword>` is a single keyword that would match in the path of the URL. You can add more keywords by using the comma (`,`) delimiter for each.
+    - Only one keyword can match in the URL path, _not multiple_. This is a limitation but it wasn't intended to allow multiple keywords to be checked in a path. The comma delimited keywords were meant as a shortcut to avoid writing a URL multiple times with the partial keyword pattern. So you would just write the URL and the partial keyword pattern once, then add all the individual keywords that you want to block on the URL path.
+
+## Issues
+
+Create an [issue](https://github.com/alexwkleung/block-url-extension/issues) or [discussion](https://github.com/alexwkleung/block-url-extension/discussions) if you have any issues or questions regarding the extension.
 
 ## Contribute
 
