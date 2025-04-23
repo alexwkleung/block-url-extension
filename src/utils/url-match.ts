@@ -12,8 +12,8 @@ const normalizeUrl: (url: string) => string = (url: string): string => {
 };
 
 const exactUrlMatch = (normalizedUrl: string, validUrls: string[]): boolean => {
-  return validUrls.some((pattern: string): boolean => {
-    const exactPattern: string = pattern
+  return validUrls.some((currUrl: string): boolean => {
+    const exactPattern: string = currUrl
       .replace(urlPatterns.stevenBlackHosts, '')
       .replace(urlPatterns.protocolSubdomain, '')
       .replace(urlPatterns.trailingSlash, '');
@@ -23,9 +23,9 @@ const exactUrlMatch = (normalizedUrl: string, validUrls: string[]): boolean => {
 };
 
 const wildcardUrlMatch = (normalizedUrl: string, validUrls: string[]): boolean => {
-  return validUrls.some((pattern: string): boolean => {
-    if (pattern.endsWith(urlPatterns.wildcardStr)) {
-      const basePattern = pattern
+  return validUrls.some((currUrl: string): boolean => {
+    if (currUrl.endsWith(urlPatterns.wildcardStr)) {
+      const basePattern = currUrl
         .replace(urlPatterns.protocolSubdomain, '')
         .slice(0, -2)
         .replace(urlPatterns.trailingSlash, '');
@@ -37,14 +37,39 @@ const wildcardUrlMatch = (normalizedUrl: string, validUrls: string[]): boolean =
   });
 };
 
+const partialKeywordUrlMatch = (url: string, validUrls: string[]): boolean => {
+  return validUrls.some((currUrl: string): boolean => {
+    const normalizedCurrUrl: string = normalizeUrl(currUrl);
+
+    const partialKeywordMatch: RegExpMatchArray | null = normalizedCurrUrl.match(
+      urlPatterns.partialKeyword
+    );
+
+    if (!partialKeywordMatch) return false;
+
+    const currUrlDomain: string = partialKeywordMatch[1].toLowerCase();
+
+    const keywords: string[] = partialKeywordMatch[2]
+      .split(',')
+      .map((keyword: string) => keyword.trim().toLowerCase());
+
+    const [urlDomain, ...urlPath] = normalizeUrl(url).split('/');
+    const onlyUrlPath: string = urlPath.join('/').toLowerCase();
+
+    if (urlDomain !== currUrlDomain) return false;
+
+    return keywords.some((keyword: string): boolean => onlyUrlPath.includes(keyword));
+  });
+};
+
 const basicExactUrlMatch = (url: string, validUrls: string[]): boolean => {
   return validUrls?.includes(url);
 };
 
 const basicWildcardUrlMatch = (url: string, validUrls: string[]): boolean => {
   return validUrls?.some(
-    (pattern: string): boolean =>
-      pattern.endsWith(urlPatterns.wildcardStr) && url.startsWith(pattern.slice(0, -2))
+    (currUrl: string): boolean =>
+      currUrl.endsWith(urlPatterns.wildcardStr) && url.startsWith(currUrl.slice(0, -2))
   );
 };
 
@@ -59,7 +84,10 @@ export function urlMatch(url: string, validUrls?: string[]): boolean {
   const exactMatch: boolean = exactUrlMatch(normalizedUrl, validUrls);
 
   // advanced wildcard matching
-  const wildcardMatch = wildcardUrlMatch(normalizedUrl, validUrls);
+  const wildcardMatch: boolean = wildcardUrlMatch(normalizedUrl, validUrls);
+
+  // partial keyword match (case insensitive)
+  const partialKeywordMatch: boolean = partialKeywordUrlMatch(url, validUrls);
 
   // basic exact matching
   const basicExactMatch: boolean = basicExactUrlMatch(url, validUrls);
@@ -67,5 +95,7 @@ export function urlMatch(url: string, validUrls?: string[]): boolean {
   // basic wildcard matching
   const basicWildcardMatch: boolean = basicWildcardUrlMatch(url, validUrls);
 
-  return exactMatch || wildcardMatch || basicExactMatch || basicWildcardMatch;
+  return (
+    exactMatch || wildcardMatch || partialKeywordMatch || basicExactMatch || basicWildcardMatch
+  );
 }
