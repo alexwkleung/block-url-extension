@@ -73,7 +73,7 @@ const basicWildcardUrlMatch = (url: string, validUrls: string[]): boolean => {
   );
 };
 
-export function urlMatch(url: string, validUrls?: string[]): boolean {
+export function urlMatch(url: string, validUrls: string[]): boolean {
   // validUrls is null or is empty
   if (!validUrls || validUrls.length === 0) return false;
 
