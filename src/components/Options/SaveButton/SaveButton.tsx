@@ -12,6 +12,7 @@ import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import Tooltip from '@mui/material/Tooltip';
 import { platform } from '../../../utils/platform';
+import { urlPatterns } from '../../../utils/url-patterns';
 
 import type { UrlData } from '../../../types/url-data';
 
@@ -37,7 +38,7 @@ const SaveButton = ({ isPressedKeySave }: { isPressedKeySave: boolean }) => {
     setSaveDialogOpen(false);
   };
 
-  const saveButtonContinue = () => {
+  const saveButtonContinue = async () => {
     setSaveDialogOpen(false);
 
     if (editor) {
@@ -50,10 +51,21 @@ const SaveButton = ({ isPressedKeySave }: { isPressedKeySave: boolean }) => {
       // array containing all possible valid urls
       const validUrls: string[] = editorUrls.filter((url: string): boolean => isValidUrl(url));
 
+      // size of valid urls array
+      const validUrlsSize: number | null = Object.keys(
+        validUrls.filter(
+          (url: string) =>
+            // comments are filtered out
+            !url.startsWith(urlPatterns.doubleSlashCommentStr) &&
+            !url.startsWith(urlPatterns.hashCommentStr)
+        )
+      ).length;
+
       // object of url related data to be stored
       const urlData: UrlData = {
         editorValue: editorValue,
         validUrls: validUrls,
+        validUrlsSize: validUrlsSize,
       };
 
       chrome.storage.local.set(urlData);
@@ -103,7 +115,7 @@ const SaveButton = ({ isPressedKeySave }: { isPressedKeySave: boolean }) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={saveButtonClose}>Cancel</Button>
-          <Button onClick={saveButtonContinue}>Save</Button>
+          <Button onClick={async () => saveButtonContinue()}>Save</Button>
         </DialogActions>
       </Dialog>
       {saveAlert ? (
