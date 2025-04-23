@@ -52,6 +52,7 @@ const Popup = () => {
           sx={{
             '&:hover': {
               backgroundColor: 'lightgrey',
+              borderRadius: '10px',
             },
             padding: '5px',
             fontSize: '30px',
