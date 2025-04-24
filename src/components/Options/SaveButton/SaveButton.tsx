@@ -17,6 +17,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 import type { UrlData } from '../../../types/url-data';
 
+import './SaveButton.css';
+
 const SaveButton = ({ isPressedKeySave }: { isPressedKeySave: boolean }) => {
   const { editor } = useContext(MonacoEditorContext);
 
@@ -113,25 +115,61 @@ const SaveButton = ({ isPressedKeySave }: { isPressedKeySave: boolean }) => {
           sx={{
             fontSize: '50px',
             '&:hover': {
-              backgroundColor: '#4e4e4e',
-              borderRadius: '10px',
+              backgroundColor: 'var(--button-bg)',
+              borderRadius: 'var(--button-border-radius)',
             },
-            padding: '5px',
+            padding: 'var(--button-padding)',
             marginLeft: '50px',
-            color: '#d4d4d4',
+            color: 'var(--default-color)',
           }}
         />
       </Tooltip>
-      <Dialog open={saveDialogOpen} onClose={saveButtonClose} disableRestoreFocus>
-        <DialogTitle>Save All URLs?</DialogTitle>
+      <Dialog
+        open={saveDialogOpen}
+        onClose={saveButtonClose}
+        disableRestoreFocus
+        slotProps={{
+          paper: {
+            sx: {
+              backgroundColor: 'var(--default-bg)',
+            },
+          },
+        }}
+      >
+        <DialogTitle sx={{ color: 'var(--default-color)' }}>Save All URLs?</DialogTitle>
         <DialogContent>
-          <DialogContentText>Are you sure you want to save all URLs?</DialogContentText>
+          <DialogContentText sx={{ color: 'var(--default-color)' }}>
+            Are you sure you want to save all URLs?
+          </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={saveButtonClose} disabled={saveLoading}>
+          <Button
+            onClick={saveButtonClose}
+            disabled={saveLoading}
+            sx={{
+              '&:hover': {
+                backgroundColor: 'var(--button-bg)',
+                borderRadius: 'var(--button-border-radius)',
+              },
+              '&.Mui-disabled': {
+                color: 'grey',
+              },
+              color: 'var(--default-color)',
+            }}
+          >
             Cancel
           </Button>
-          <Button onClick={saveButtonContinue} disabled={saveLoading}>
+          <Button
+            onClick={saveButtonContinue}
+            disabled={saveLoading}
+            sx={{
+              '&:hover': {
+                backgroundColor: 'var(--button-bg)',
+                borderRadius: 'var(--button-border-radius)',
+              },
+              color: 'var(--default-color)',
+            }}
+          >
             {saveLoading ? <CircularProgress size={24} /> : 'Save'}
           </Button>
         </DialogActions>

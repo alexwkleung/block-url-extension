@@ -1,4 +1,6 @@
-.popup-container {
-  -webkit-user-select: none;
-  user-select: none;
+@import '../../assets/shared-variables.css';
+
+body {
+  background-color: var(--default-bg);
+  color: var(--default-color);
 }

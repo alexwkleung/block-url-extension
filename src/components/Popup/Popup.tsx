@@ -41,11 +41,12 @@ const Popup = () => {
           onClick={async () => await settingsIconClick()}
           sx={{
             '&:hover': {
-              backgroundColor: 'lightgrey',
-              borderRadius: '10px',
+              backgroundColor: 'var(--button-bg)',
+              borderRadius: 'var(--button-border-radius)',
             },
-            padding: '5px',
+            padding: 'var(--button-padding)',
             fontSize: '30px',
+            color: 'var(--default-color)',
           }}
         />
       </div>
