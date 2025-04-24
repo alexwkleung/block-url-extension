@@ -94,9 +94,7 @@ const SaveButton = ({ isPressedKeySave }: { isPressedKeySave: boolean }) => {
     setErrorSaveAlert(false);
   };
 
-  const saveKeyTitle: string = `Save ${
-    platform.platformMac.includes(platform.agentPlatform) ? '(⌘+S)' : '(Ctrl+S)'
-  }`;
+  const saveKeyTitle: string = `Save ${platform.isMac ? '(⌘+S)' : '(Ctrl+S)'}`;
 
   return (
     <>
