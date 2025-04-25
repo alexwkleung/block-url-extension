@@ -159,6 +159,11 @@ You can ignore URLs using the comment syntax. Add one of these characters at the
     - To create a partial keyword pattern, you must add `/[<keyword>]` at the end of the URL. `<keyword>` is a single keyword that would match in the path of the URL. You can add more keywords by using the comma (`,`) delimiter for each.
     - Only one keyword can match in the URL path, _not multiple_. This is a limitation but it wasn't intended to allow multiple keywords to be checked in a path. The comma delimited keywords were meant as a shortcut to avoid writing a URL multiple times with the partial keyword pattern. So you would just write the URL and the partial keyword pattern once, then add all the individual keywords that you want to block on the URL path.
 
+11. **Why is saving so slow with lots of URLs?**
+
+    - At the moment, there are no optimization strategies implemented yet for saving. Therefore, everything is saved in one go which becomes inefficient as the number of URLs increases.
+    - In the future, there will be optimization strategies in place to mitigate slow saving and UI blocking to improve the user experience.
+
 ## Issues
 
 Create an [issue](https://github.com/alexwkleung/block-url-extension/issues) or [discussion](https://github.com/alexwkleung/block-url-extension/discussions) if you have any issues or questions regarding the extension.
