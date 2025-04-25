@@ -106,7 +106,7 @@ const SaveButton = ({ isPressedKeySave }: { isPressedKeySave: boolean }) => {
           tooltip: {
             sx: {
               fontSize: '18px',
-              fontFamily: 'system-ui',
+              fontFamily: 'var(--default-font-family)',
             },
           },
         }}
@@ -137,11 +137,15 @@ const SaveButton = ({ isPressedKeySave }: { isPressedKeySave: boolean }) => {
           },
         }}
       >
-        <DialogTitle sx={{ color: 'var(--default-color)', fontFamily: 'system-ui' }}>
+        <DialogTitle
+          sx={{ color: 'var(--default-color)', fontFamily: 'var(--default-font-family)' }}
+        >
           Save All URLs?
         </DialogTitle>
         <DialogContent>
-          <DialogContentText sx={{ color: 'var(--default-color)', fontFamily: 'system-ui' }}>
+          <DialogContentText
+            sx={{ color: 'var(--default-color)', fontFamily: 'var(--default-font-family)' }}
+          >
             Are you sure you want to save all URLs?
           </DialogContentText>
         </DialogContent>
@@ -158,7 +162,7 @@ const SaveButton = ({ isPressedKeySave }: { isPressedKeySave: boolean }) => {
                 color: 'grey',
               },
               color: 'var(--default-color)',
-              fontFamily: 'system-ui',
+              fontFamily: 'var(--default-font-family)',
             }}
           >
             Cancel
@@ -172,10 +176,14 @@ const SaveButton = ({ isPressedKeySave }: { isPressedKeySave: boolean }) => {
                 borderRadius: 'var(--button-border-radius)',
               },
               color: 'var(--default-color)',
-              fontFamily: 'system-ui',
+              fontFamily: 'var(--default-font-family)',
             }}
           >
-            {saveLoading ? <CircularProgress size={24} /> : 'Save'}
+            {saveLoading ? (
+              <CircularProgress size={24} sx={{ color: 'var(--default-color)' }} />
+            ) : (
+              'Save'
+            )}
           </Button>
         </DialogActions>
       </Dialog>
@@ -192,7 +200,7 @@ const SaveButton = ({ isPressedKeySave }: { isPressedKeySave: boolean }) => {
             sx={{
               backgroundColor: 'var(--success-alert-bg)',
               color: 'var(--alert-color)',
-              fontFamily: 'system-ui',
+              fontFamily: 'var(--default-font-family)',
             }}
           >
             Successfully saved URLs
@@ -212,7 +220,7 @@ const SaveButton = ({ isPressedKeySave }: { isPressedKeySave: boolean }) => {
             sx={{
               backgroundColor: 'var(--error-alert-bg)',
               color: 'var(--alert-color)',
-              fontFamily: 'system-ui',
+              fontFamily: 'var(--default-font-family)',
             }}
           >
             Error: Unable to save URLs

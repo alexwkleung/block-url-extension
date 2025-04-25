@@ -5,7 +5,7 @@
 @import '../../assets/shared-variables.css';
 
 * {
-  font-family: 'system-ui';
+  font-family: var(--default-font-family);
 }
 
 body {

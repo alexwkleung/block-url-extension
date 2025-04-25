@@ -8,4 +8,5 @@
   --success-alert-bg: #8bc34a;
   --error-alert-bg: #ef5350;
   --alert-color: #000000;
+  --default-font-family: 'system-ui';
 }
