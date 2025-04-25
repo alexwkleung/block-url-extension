@@ -8,7 +8,7 @@ const Error = () => {
       <div className="error-box flex items-center">
         <ErrorIcon
           sx={{
-            fill: '#ffc107',
+            fill: 'var(--error-icon-fill)',
             height: '45px',
             width: '75px',
             padding: '5px',

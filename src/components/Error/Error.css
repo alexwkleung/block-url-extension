@@ -18,5 +18,5 @@ body {
 }
 
 .error-heading {
-  color: #bdbdbd;
+  color: var(--default-color);
 }

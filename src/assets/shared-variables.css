@@ -4,4 +4,8 @@
   --button-bg: #4e4e4e;
   --button-border-radius: 10px;
   --button-padding: 5px;
+  --error-icon-fill: #ffc107;
+  --success-alert-bg: #8bc34a;
+  --error-alert-bg: #ef5350;
+  --alert-color: #000000;
 }

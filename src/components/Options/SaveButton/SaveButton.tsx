@@ -106,6 +106,7 @@ const SaveButton = ({ isPressedKeySave }: { isPressedKeySave: boolean }) => {
           tooltip: {
             sx: {
               fontSize: '18px',
+              fontFamily: 'system-ui',
             },
           },
         }}
@@ -136,9 +137,11 @@ const SaveButton = ({ isPressedKeySave }: { isPressedKeySave: boolean }) => {
           },
         }}
       >
-        <DialogTitle sx={{ color: 'var(--default-color)' }}>Save All URLs?</DialogTitle>
+        <DialogTitle sx={{ color: 'var(--default-color)', fontFamily: 'system-ui' }}>
+          Save All URLs?
+        </DialogTitle>
         <DialogContent>
-          <DialogContentText sx={{ color: 'var(--default-color)' }}>
+          <DialogContentText sx={{ color: 'var(--default-color)', fontFamily: 'system-ui' }}>
             Are you sure you want to save all URLs?
           </DialogContentText>
         </DialogContent>
@@ -155,6 +158,7 @@ const SaveButton = ({ isPressedKeySave }: { isPressedKeySave: boolean }) => {
                 color: 'grey',
               },
               color: 'var(--default-color)',
+              fontFamily: 'system-ui',
             }}
           >
             Cancel
@@ -168,6 +172,7 @@ const SaveButton = ({ isPressedKeySave }: { isPressedKeySave: boolean }) => {
                 borderRadius: 'var(--button-border-radius)',
               },
               color: 'var(--default-color)',
+              fontFamily: 'system-ui',
             }}
           >
             {saveLoading ? <CircularProgress size={24} /> : 'Save'}
@@ -184,7 +189,11 @@ const SaveButton = ({ isPressedKeySave }: { isPressedKeySave: boolean }) => {
           <Alert
             icon={false}
             onClose={alertOnClose}
-            sx={{ backgroundColor: '#8bc34a', color: '#000000' }}
+            sx={{
+              backgroundColor: 'var(--success-alert-bg)',
+              color: 'var(--alert-color)',
+              fontFamily: 'system-ui',
+            }}
           >
             Successfully saved URLs
           </Alert>
@@ -200,7 +209,11 @@ const SaveButton = ({ isPressedKeySave }: { isPressedKeySave: boolean }) => {
           <Alert
             icon={false}
             onClose={alertOnClose}
-            sx={{ backgroundColor: '#ef5350', color: '#000000' }}
+            sx={{
+              backgroundColor: 'var(--error-alert-bg)',
+              color: 'var(--alert-color)',
+              fontFamily: 'system-ui',
+            }}
           >
             Error: Unable to save URLs
           </Alert>
