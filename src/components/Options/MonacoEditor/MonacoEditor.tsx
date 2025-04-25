@@ -5,6 +5,7 @@ import { initMonacoTheme } from './monaco/init-theme';
 import { MonacoEditorContext } from './context/MonacoEditorContext';
 import { initCustomPlainTextLanguage } from './language/custom-plaintext';
 import { initMonacoDecorations } from './language/decorations';
+import { findWidgetAriaHidden } from './monaco/find-widget-aria-hidden';
 
 import type { RefObject } from 'react';
 import type { EditorValue } from '../../../types/url-data';
@@ -44,11 +45,14 @@ const MonacoEditor = () => {
 
     setEditor(editorInstance);
 
+    const findWidget = findWidgetAriaHidden(container);
+
     // clean up
     return () => {
       setEditor(null);
       editorInstance.dispose();
       container.replaceChildren();
+      findWidget();
     };
   }, [setEditor]);
 
