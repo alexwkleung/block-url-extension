@@ -164,6 +164,20 @@ You can ignore URLs using the comment syntax. Add one of these characters at the
     - At the moment, there are no optimization strategies implemented yet for saving. Therefore, everything is saved in one go which becomes inefficient as the number of URLs increases.
     - In the future, there will be optimization strategies in place to mitigate slow saving and UI blocking to improve the user experience.
 
+12. **When I navigate to a blocked URL after saving, why am I still allowed to go to it?**
+
+    - This could be due to a few reasons (not an extensive list):
+      - URL is invalid.
+      - Patterns are incorrect causing an invalid URL.
+      - Service worker listeners being inactive. This could happen especially in incognito windows where the service worker might act differently.
+      - Extension errors.
+    - Possible fixes for the above (not an extensive list):
+      - Restart the browser.
+      - Close existing window(s) and open a new one.
+      - Refresh the extension.
+      - Reinstall the extension.
+    - The methods used to block URLs are not perfect so you might encounter issues or bugs while using the extension.
+
 ## Issues
 
 Create an [issue](https://github.com/alexwkleung/block-url-extension/issues) or [discussion](https://github.com/alexwkleung/block-url-extension/discussions) if you have any issues or questions regarding the extension.
