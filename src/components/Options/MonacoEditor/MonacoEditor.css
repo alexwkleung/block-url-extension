@@ -18,6 +18,15 @@
 }
 
 .wildcard-decoration {
-  color: grey !important;
+  color: #767674 !important;
+  font-weight: bold;
+}
+
+.partial-keyword-decoration {
+  color: #767674 !important;
+  font-weight: bold;
+}
+.keyword-decoration {
+  color: #bdb4bf !important;
   font-weight: bold;
 }
