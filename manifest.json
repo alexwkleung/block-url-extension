@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Block URL",
   "version": "1.0.0",
-  "description": "Block URLs of your choice.",
+  "description": "Block URLs of your choice. Supports various URL patterns!",
   "action": {
     "default_popup": "index.html"
   },
@@ -26,5 +26,8 @@
   ],
   "permissions": ["tabs", "webNavigation", "storage", "unlimitedStorage"],
   "host_permissions": ["<all_urls>"],
-  "incognito": "split"
+  "incognito": "split",
+  "icons": {
+    "128": "icon128.png"
+  }
 }

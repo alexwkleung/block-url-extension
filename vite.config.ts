@@ -13,6 +13,10 @@ export default defineConfig({
           src: 'manifest.json',
           dest: './',
         },
+        {
+          src: 'icon/icon128.png',
+          dest: './',
+        },
       ],
     }),
     tailwindcss(),
