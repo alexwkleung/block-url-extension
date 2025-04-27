@@ -1,6 +1,6 @@
 # Block URL Extension
 
-A Chrome extension that blocks URLs of your choice.
+A Chrome extension that blocks URLs of your choice. Supports various URL patterns.
 
 Those who want to simply block URLs at a browser level (i.e., personal reason, work distraction, etc) will appreciate this extension to help with their daily browsing.
 
@@ -131,8 +131,11 @@ You can ignore URLs using the comment syntax. Add one of these characters at the
      - [service_worker.ts](https://github.com/alexwkleung/block-url-extension/blob/main/src/service-worker/service_worker.ts)
      - [content.ts](https://github.com/alexwkleung/block-url-extension/blob/main/src/content/content.ts)
    - Basic overview:
+
      - `service_worker.ts` runs in the background when the extension is running. It handles displaying the error page and reading your tab data to execute existence logic between the tab URL and storage.
      - `content.ts` handles the document logic on the client, specifically an observer to detect the document state. It communicates with the service worker using messages to execute code.
+
+   - In addition, [url-exists-in-chrome-storage.ts](https://github.com/alexwkleung/block-url-extension/blob/main/src/utils/url-exists-in-chrome-storage.ts) is the utility function used in `service_worker.ts` to determine if the error page should be sent to the client or not.
 
 6. **Why are there are two ways to insert a comment?**
 
@@ -169,8 +172,8 @@ You can ignore URLs using the comment syntax. Add one of these characters at the
     - This could be due to a few reasons (not an extensive list):
       - URL is invalid.
       - Patterns are incorrect causing an invalid URL.
-      - Service worker listeners being inactive. This could happen especially in incognito windows where the service worker might act differently.
-      - Extension errors.
+      - Service worker listeners being inactive. This could happen in either regular browsing or incognito since the service workers are running in separate processes.
+      - Extension errors of any kind.
     - Possible fixes for the above (not an extensive list):
       - Restart the browser.
       - Close existing window(s) and open a new one.
