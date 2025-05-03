@@ -12,7 +12,7 @@ The sections below contain the steps to use Block URL.
 
 ![Open extension settings](./assets/open-extension-settings.png)
 
-3. Enter your URLs in the editor. Once you entered them, press the save icon on the top left.
+3. Enter your URLs in the editor. Once you entered them, press the save icon on the top left. Alternatively, you can press Cmd+S (macOS) or Ctrl+S (Windows/Linux) as the save shortcut.
 
 ![Enter urls and press save button](./assets/enter-urls-and-press-save-button.png)
 

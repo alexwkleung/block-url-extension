@@ -3,7 +3,7 @@ import { defineConfig } from 'vitepress';
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: 'Block URL',
-  description: 'Documentation for Block URL',
+  description: 'Documentation website for Block URL',
   themeConfig: {
     logo: '/assets/icon128.png',
     // https://vitepress.dev/reference/default-theme-config
@@ -65,8 +65,8 @@ export default defineConfig({
         collapsed: false,
         items: [
           {
-            text: 'Frequently Asked Questions',
-            link: '/frequently-asked-questions',
+            text: 'FAQ + Troubleshooting',
+            link: '/faq-and-troubleshooting',
           },
           {
             text: 'Issues',

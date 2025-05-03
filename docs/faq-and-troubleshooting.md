@@ -1,4 +1,8 @@
-# Frequently Asked Questions
+# FAQ + Troubleshooting
+
+A list of FAQs and mini troubleshooting guide.
+
+---
 
 1. **Where does my data get stored?**
 
