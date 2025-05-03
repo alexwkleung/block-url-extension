@@ -72,7 +72,7 @@ TBA
 
 ### Manual
 
-1. Build the extension via the steps in the [development section](#development) or download the pre-compiled `dist` through [GitHub releases](https://github.com/alexwkleung/block-url-extension/releases).
+1. Build the extension via the steps in the [development](#development) section or download the pre-compiled `dist` through [GitHub releases](https://github.com/alexwkleung/block-url-extension/releases).
 
 2. Go to "Mange Extensions" on Chrome.
 
@@ -98,7 +98,7 @@ TBA
 
 ![Open extension settings](./screenshots/open-extension-settings.png)
 
-3. Enter your URLs in the editor. Once you entered them, press the save icon on the top left.
+3. Enter your URLs in the editor. Once you entered them, press the save icon on the top left. Alternatively, you can press Cmd+S (macOS) or Ctrl+S (Windows/Linux) as the save shortcut.
 
 ![Enter urls and press save button](./screenshots/enter-urls-and-press-save-button.png)
 
