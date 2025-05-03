@@ -1,16 +1,14 @@
 import { defineConfig } from 'vitepress';
 
-// https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: 'Block URL',
   description: 'Documentation website for Block URL',
   themeConfig: {
     logo: '/assets/icon128.png',
-    // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Documentation', link: '/what-is-block-url' },
-      { text: 'Sponsor / Donate', link: 'https://ko-fi.com/alexwkleung' },
+      { text: 'Sponsor / Donate', link: 'sponsor' },
     ],
 
     sidebar: [
@@ -71,6 +69,16 @@ export default defineConfig({
           {
             text: 'Issues',
             link: '/issues',
+          },
+        ],
+      },
+      {
+        text: 'Support Block URL',
+        collapsed: false,
+        items: [
+          {
+            text: 'Sponsor / Donate',
+            link: '/sponsor',
           },
         ],
       },

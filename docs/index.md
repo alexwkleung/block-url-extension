@@ -1,5 +1,4 @@
 ---
-# https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
 hero:
@@ -18,7 +17,7 @@ hero:
       link: https://github.com/alexwkleung/block-url-extension
     - theme: alt
       text: Sponsor / Donate
-      link: https://ko-fi.com/alexwkleung
+      link: /sponsor
 
 features:
   - title: Supports Various URL Patterns
