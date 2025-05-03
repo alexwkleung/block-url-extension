@@ -24,7 +24,7 @@
       "resources": ["error.html"]
     }
   ],
-  "permissions": ["tabs", "webNavigation", "storage", "unlimitedStorage"],
+  "permissions": ["tabs", "storage", "unlimitedStorage"],
   "host_permissions": ["<all_urls>"],
   "incognito": "split",
   "icons": {
