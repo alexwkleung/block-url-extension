@@ -13,7 +13,11 @@ import type { UrlData } from '../../../types/url-data';
 
 import './SaveButton.css';
 
-const SaveButton = ({ isPressedKeySave }: { isPressedKeySave: boolean }) => {
+interface SaveButton {
+  isPressedKeySave: boolean;
+}
+
+const SaveButton = ({ isPressedKeySave }: SaveButton) => {
   const { editor } = useContext(MonacoEditorContext);
 
   const [saveDialogOpen, setSaveDialogOpen] = useState(false);
