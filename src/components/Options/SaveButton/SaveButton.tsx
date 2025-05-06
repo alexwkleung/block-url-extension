@@ -1,19 +1,13 @@
 import { useState, useContext, useEffect } from 'react';
 import SaveIcon from '@mui/icons-material/Save';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Button from '@mui/material/Button';
 import { MonacoEditorContext } from '../MonacoEditor/context/MonacoEditorContext';
 import { isValidUrl } from '../../../utils/is-valid-url';
-import Alert from '@mui/material/Alert';
-import Snackbar from '@mui/material/Snackbar';
 import Tooltip from '@mui/material/Tooltip';
 import { platform } from '../../../utils/platform';
 import { urlPatterns } from '../../../utils/url-patterns';
-import CircularProgress from '@mui/material/CircularProgress';
+import { SaveDialog } from '../SaveDialog/SaveDialog';
+import { SaveAlert } from '../Alert/SaveAlert';
+import { ErrorSaveAlert } from '../Alert/ErrorSaveAlert';
 
 import type { UrlData } from '../../../types/url-data';
 
@@ -26,6 +20,8 @@ const SaveButton = ({ isPressedKeySave }: { isPressedKeySave: boolean }) => {
   const [saveAlert, setSaveAlert] = useState(false);
   const [errorSaveAlert, setErrorSaveAlert] = useState(false);
   const [saveLoading, setSaveLoading] = useState(false);
+
+  const saveKeyTitle: string = `Save ${platform.isMac ? '(⌘+S)' : '(Ctrl+S)'}`;
 
   useEffect(() => {
     // save key is pressed
@@ -96,8 +92,6 @@ const SaveButton = ({ isPressedKeySave }: { isPressedKeySave: boolean }) => {
     setErrorSaveAlert(false);
   };
 
-  const saveKeyTitle: string = `Save ${platform.isMac ? '(⌘+S)' : '(Ctrl+S)'}`;
-
   return (
     <>
       <Tooltip
@@ -125,107 +119,15 @@ const SaveButton = ({ isPressedKeySave }: { isPressedKeySave: boolean }) => {
           }}
         />
       </Tooltip>
-      <Dialog
-        open={saveDialogOpen}
-        onClose={saveButtonClose}
-        disableRestoreFocus
-        slotProps={{
-          paper: {
-            sx: {
-              backgroundColor: 'var(--default-bg)',
-            },
-          },
-        }}
-      >
-        <DialogTitle
-          sx={{ color: 'var(--default-color)', fontFamily: 'var(--default-font-family)' }}
-        >
-          Save All URLs?
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText
-            sx={{ color: 'var(--default-color)', fontFamily: 'var(--default-font-family)' }}
-          >
-            Are you sure you want to save all URLs?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={saveButtonClose}
-            disabled={saveLoading}
-            sx={{
-              '&:hover': {
-                backgroundColor: 'var(--button-bg)',
-                borderRadius: 'var(--button-border-radius)',
-              },
-              '&.Mui-disabled': {
-                color: 'grey',
-              },
-              color: 'var(--default-color)',
-              fontFamily: 'var(--default-font-family)',
-            }}
-          >
-            Cancel
-          </Button>
-          <Button
-            onClick={saveButtonContinue}
-            disabled={saveLoading}
-            sx={{
-              '&:hover': {
-                backgroundColor: 'var(--button-bg)',
-                borderRadius: 'var(--button-border-radius)',
-              },
-              color: 'var(--default-color)',
-              fontFamily: 'var(--default-font-family)',
-            }}
-          >
-            {saveLoading ? (
-              <CircularProgress size={24} sx={{ color: 'var(--default-color)' }} />
-            ) : (
-              'Save'
-            )}
-          </Button>
-        </DialogActions>
-      </Dialog>
-      {saveAlert ? (
-        <Snackbar
-          autoHideDuration={3500}
-          open={saveAlert}
-          onClose={alertOnClose}
-          disableWindowBlurListener={true}
-        >
-          <Alert
-            icon={false}
-            onClose={alertOnClose}
-            sx={{
-              backgroundColor: 'var(--success-alert-bg)',
-              color: 'var(--alert-color)',
-              fontFamily: 'var(--default-font-family)',
-            }}
-          >
-            Successfully saved URLs
-          </Alert>
-        </Snackbar>
-      ) : null}
+      <SaveDialog
+        saveDialogOpen={saveDialogOpen}
+        saveButtonClose={saveButtonClose}
+        saveLoading={saveLoading}
+        saveButtonContinue={saveButtonContinue}
+      />
+      {saveAlert ? <SaveAlert saveAlert={saveAlert} alertOnClose={alertOnClose} /> : null}
       {errorSaveAlert ? (
-        <Snackbar
-          autoHideDuration={3500}
-          open={errorSaveAlert}
-          onClose={alertOnClose}
-          disableWindowBlurListener={true}
-        >
-          <Alert
-            icon={false}
-            onClose={alertOnClose}
-            sx={{
-              backgroundColor: 'var(--error-alert-bg)',
-              color: 'var(--alert-color)',
-              fontFamily: 'var(--default-font-family)',
-            }}
-          >
-            Error: Unable to save URLs
-          </Alert>
-        </Snackbar>
+        <ErrorSaveAlert errorSaveAlert={errorSaveAlert} alertOnClose={alertOnClose} />
       ) : null}
     </>
   );

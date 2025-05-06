@@ -1,12 +1,13 @@
 :root {
   --default-bg: #1e1e1f;
   --default-color: #d4d4d4;
+  --default-font-family: 'system-ui';
   --button-bg: #4e4e4e;
   --button-border-radius: 10px;
   --button-padding: 5px;
   --error-icon-fill: #ffc107;
-  --success-alert-bg: #8bc34a;
-  --error-alert-bg: #ef5350;
-  --alert-color: #000000;
-  --default-font-family: 'system-ui';
+  --success-alert-bg: #40443a;
+  --error-alert-bg: #923533;
+  /* NOTE: this is an alias to make referencing cleaner. therefore, the value is ambiguous with default-color */
+  --alert-color: var(--default-color);
 }
