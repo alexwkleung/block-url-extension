@@ -2,7 +2,7 @@
   <table>
     <tr>
       <td>
-        <a href="https://block-url.netlify.app/"><img src="./icon/icon128.png" alt="Block URL Icon" width="64"></a>
+        <a href="https://block-url.netlify.app/" target="_blank"><img src="./icon/icon128.png" alt="Block URL Icon" width="64"></a>
       </td>
       <td>
         <h1>Block URL</h1>
