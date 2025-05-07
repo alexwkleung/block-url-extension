@@ -81,7 +81,7 @@ TBA
 
 ### Manual
 
-1. Build the extension via the steps in the [development](#development) section.
+1. Build the extension via the steps in the [development](#development) section or download the pre-compiled `dist` through one of the [releases](https://github.com/alexwkleung/block-url-extension/releases).
 
 2. Go to "Mange Extensions" on Chrome.
 
