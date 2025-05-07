@@ -1,13 +1,15 @@
-<table>
-  <tr>
-    <td>
-      <img src="./icon/icon128.png" alt="Block URL Icon" width="64">
-    </td>
-    <td>
-      <h1>Block URL</h1>
-    </td>
-  </tr>
-</table>
+<div align="center">
+  <table>
+    <tr>
+      <td>
+        <img src="./icon/icon128.png" alt="Block URL Icon" width="64">
+      </td>
+      <td>
+        <h1>Block URL</h1>
+      </td>
+    </tr>
+  </table>
+</div>
 
 A Chrome extension that blocks URLs of your choice. Supports various URL patterns.
 
