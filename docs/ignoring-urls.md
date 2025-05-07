@@ -16,4 +16,4 @@ Given the following two lines of comment syntaxes:
 
 Would look like this in the editor:
 
-![Ignoring urls](../assets/ignoring-urls.png)
+![Ignoring urls](assets/ignoring-urls.png)
