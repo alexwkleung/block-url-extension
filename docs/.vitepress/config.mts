@@ -4,7 +4,7 @@ export default defineConfig({
   title: 'Block URL',
   description: 'Documentation website for Block URL',
   themeConfig: {
-    logo: '/assets/icon128.png',
+    logo: '/icon128.png',
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Documentation', link: '/what-is-block-url' },
