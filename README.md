@@ -1,9 +1,13 @@
-<div style="display: flex; align-items: center; justify-content: center;margin-bottom: 24px">
-  <img src="./icon/icon128.png" style="height: 64px; margin-right: 16px;">
-  <h1 align="center" style="border-bottom: none; margin: 0;">
-    Block URL
-  </h1>
-</div>
+<table>
+  <tr>
+    <td>
+      <img src="./icon/icon128.png" alt="Block URL Icon" width="64">
+    </td>
+    <td>
+      <h1>Block URL</h1>
+    </td>
+  </tr>
+</table>
 
 A Chrome extension that blocks URLs of your choice. Supports various URL patterns.
 
