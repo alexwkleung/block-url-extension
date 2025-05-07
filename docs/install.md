@@ -14,7 +14,7 @@ TBA
 Any forks or source code that is not from the original repository may introduce a security risk. **You are responsible** for ensuring that your unpacked extensions from source are clean.
 :::
 
-1. Build the extension via the steps in the [development](./building-the-extension) section or download the pre-compiled `dist` through [GitHub releases](https://github.com/alexwkleung/block-url-extension/releases).
+1. Build the extension via the steps in [Building the Extension](./building-the-extension).
 
 2. Go to "Mange Extensions" on Chrome.
 

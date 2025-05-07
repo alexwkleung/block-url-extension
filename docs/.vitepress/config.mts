@@ -36,6 +36,11 @@ export default defineConfig({
         items: [{ text: 'Install the Extension', link: '/install' }],
       },
       {
+        text: 'Development',
+        collapsed: false,
+        items: [{ text: 'Building the Extension', link: '/building-the-extension' }],
+      },
+      {
         text: 'Usage',
         collapsed: false,
         items: [
@@ -52,11 +57,6 @@ export default defineConfig({
             link: '/ignoring-urls',
           },
         ],
-      },
-      {
-        text: 'Development',
-        collapsed: false,
-        items: [{ text: 'Building the Extension', link: '/building-the-extension' }],
       },
       {
         text: 'Help',

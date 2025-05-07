@@ -17,3 +17,5 @@ npm run build
 ```
 
 5. The extension contents are located in the `dist` folder.
+
+6. Go to [Install the Extension](./install) to install the extension locally.

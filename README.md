@@ -62,6 +62,8 @@ npm run build
 
 5. The extension contents are located in the `dist` folder.
 
+6. Go to [Extension Installation](#extension-installation) to install the extension locally.
+
 ## Extension Installation
 
 \*\*Before installation and usage, please read the [FAQ](#faq) as it contains important questions and answers which are good to know as a user of this extension.
@@ -72,7 +74,7 @@ TBA
 
 ### Manual
 
-1. Build the extension via the steps in the [development](#development) section or download the pre-compiled `dist` through [GitHub releases](https://github.com/alexwkleung/block-url-extension/releases).
+1. Build the extension via the steps in the [development](#development) section.
 
 2. Go to "Mange Extensions" on Chrome.
 
