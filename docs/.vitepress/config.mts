@@ -9,6 +9,7 @@ export default defineConfig({
       { text: 'Home', link: '/' },
       { text: 'Documentation', link: '/what-is-block-url' },
       { text: 'Sponsor / Donate', link: 'sponsor' },
+      { text: 'Privacy Policy', link: '/privacy-policy' },
     ],
 
     sidebar: [
@@ -79,6 +80,16 @@ export default defineConfig({
           {
             text: 'Sponsor / Donate',
             link: '/sponsor',
+          },
+        ],
+      },
+      {
+        text: 'Privacy Policy',
+        collapsed: false,
+        items: [
+          {
+            text: 'Privacy Policy',
+            link: '/privacy-policy',
           },
         ],
       },
