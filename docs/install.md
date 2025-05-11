@@ -6,7 +6,19 @@ Those who like to tinker with software would want to follow the [Manual](#manual
 
 ## Chrome Web Store
 
-TBA
+::: info
+This is the recommended approach for installing the extension.
+:::
+
+1. Go to the official [Chrome Web Store](https://chromewebstore.google.com/detail/block-url/kpccminahgnkgkfmodbjeocmeichmoec) page for Block URL. This is the only official Chrome Web Store link.
+
+2. Click "Add to Chrome".
+
+![Add to chrome](./assets/chrome-web-store.png)
+
+3. Click on "Add extension".
+
+![Add extension](./assets//add-extension.png)
 
 ## Manual
 

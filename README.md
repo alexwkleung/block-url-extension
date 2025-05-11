@@ -77,7 +77,15 @@ npm run build
 
 ### Chrome Web Store
 
-TBA
+1. Go to the official [Chrome Web Store](https://chromewebstore.google.com/detail/block-url/kpccminahgnkgkfmodbjeocmeichmoec) page for Block URL. This is the only official Chrome Web Store link.
+
+2. Click "Add to Chrome".
+
+![Add to chrome](./screenshots/chrome-web-store.png)
+
+3. Click on "Add extension".
+
+![Add extension](./screenshots/add-extension.png)
 
 ### Manual
 
